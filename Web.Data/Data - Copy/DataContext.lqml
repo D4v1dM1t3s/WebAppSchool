@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="SecurityManager" EntityNamespace="SecurityManagerContext" ContextNamespace="SecurityManagerContext" Class="SecurityManagerDataContext" Guid="4509a6c5-0191-4687-85ed-f128a1c09e4c" Provider="Devart.Data.SqlServer.Linq.Provider.SqlDataProvider, Devart.Data.SqlServer.Linq" Extended="true" xmlns="http://schemas.devart.com/linqconnect/mapping">
+  <Connection Mode="ConnectionString" ConnectionString="Data Source=DELLSDAVID\SQLEXPRESS;Initial Catalog=SecurityManager;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
+  <Table Name="[dbo].SEC_APLICACION" Member="SecAplicacions">
+    <Type Name="SecAplicacion" Guid="b3820245-8c3b-4634-9cdb-281f3407c464">
+      <Column Name="ID_APP" Member="IdApp" Type="System.Int32" DbType="INT NOT NULL" IsPrimaryKey="true" CanBeNull="false" Precision="10" Scale="0" Guid="33335d03-d98f-4713-89a9-a5e015abf236" />
+      <Column Name="NOMBRE" Member="Nombre" Type="System.String" DbType="VARCHAR(100) NOT NULL" CanBeNull="false" MaxLength="100" Guid="1ad047a3-4098-4fbb-a8f6-7f49c8e70f36" />
+      <Column Name="ACTIVO" Member="Activo" Type="System.Boolean" DbType="BIT" CanBeNull="true" Guid="566a4377-c4a1-4ff5-99f2-2f5e8889d728" />
+      <Column Name="APP_KEY" Member="AppKey" Type="System.String" DbType="VARCHAR(50) NOT NULL" CanBeNull="false" MaxLength="50" Guid="418d46b1-f2a3-4c66-9c79-f4dd000bc374" />
+      <Association Name="SecAplicacion_SecModulo" AssociationGuid="27f8ec98-31de-4919-ba08-c86251be108e" Member="SecModulos" Guid="6ec7ca6d-744d-4f91-9b75-24f4baece600" ThisKey="IdApp" OtherKey="AplicacionId" Type="SecModulo" />
+    </Type>
+  </Table>
+  <Table Name="[dbo].SEC_MODULO" Member="SecModulos">
+    <Type Name="SecModulo" Guid="889a3ade-72d7-47fe-a6ff-04a02a593b0a">
+      <Column Name="SEC_MODULO_ID" Member="SecModuloId" Type="System.Int32" DbType="INT NOT NULL" IsPrimaryKey="true" CanBeNull="false" Precision="10" Scale="0" Guid="f66fa626-d072-4335-ae5d-415c537801b8" />
+      <Column Name="MODULO_PADRE_ID" Member="ModuloPadreId" Type="System.Int32" DbType="INT" CanBeNull="true" Precision="10" Scale="0" Guid="b71186f7-7e6c-4ab8-9d64-b5848a2b6883" />
+      <Column Name="APLICACION_ID" Member="AplicacionId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" Precision="10" Scale="0" Guid="afb55770-9470-40f0-a573-60f115a3299f" />
+      <Column Name="NOMBRE" Member="Nombre" Type="System.String" DbType="VARCHAR(100) NOT NULL" CanBeNull="false" MaxLength="100" Guid="a246fd99-081d-4d01-82f8-d347815da369" />
+      <Column Name="ACTIVO" Member="Activo" Type="System.Boolean" DbType="BIT" CanBeNull="true" Guid="d3b8c1be-2d50-4d9c-8d4d-b6ae7defd805" />
+      <Association Name="SecAplicacion_SecModulo" AssociationGuid="27f8ec98-31de-4919-ba08-c86251be108e" Member="SecAplicacion" Guid="f77be42f-843c-481c-afa0-9abba49bfc0f" ThisKey="AplicacionId" OtherKey="IdApp" Type="SecAplicacion" IsForeignKey="true" />
+      <Association Name="SecModulo_SecModulo" AssociationGuid="7fc0703f-49ab-4c44-bdd0-d5e83bc9ecd5" Member="SecModulos" Guid="0ab9aa1f-9726-41b7-9408-6b979f92d225" ThisKey="SecModuloId" OtherKey="ModuloPadreId" Type="SecModulo" />
+      <Association Name="SecModulo_SecModulo" AssociationGuid="7fc0703f-49ab-4c44-bdd0-d5e83bc9ecd5" Member="SecModulo1" Guid="39e9c161-928a-4add-8317-bdf3988abcbd" Storage="_SecModulo" ThisKey="ModuloPadreId" OtherKey="SecModuloId" Type="SecModulo" IsForeignKey="true" />
+      <Association Name="SecModulo_SecOpcion" AssociationGuid="a597ad3a-6205-4081-8059-47a10c2da67c" Member="SecOpcions" Guid="912566a2-3989-415d-8e0c-8799fdc6688d" ThisKey="SecModuloId" OtherKey="SecModuloId" Type="SecOpcion" />
+    </Type>
+  </Table>
+  <Table Name="[dbo].SEC_OPCION" Member="SecOpcions">
+    <Type Name="SecOpcion" Guid="2a8a2ced-48b2-4973-a0a8-925148be699f">
+      <Column Name="SEC_OPCION_ID" Member="SecOpcionId" Type="System.Int32" DbType="INT NOT NULL" IsPrimaryKey="true" CanBeNull="false" Precision="10" Scale="0" Guid="88dbf492-f98a-4402-a3be-43af9988ed55" />
+      <Column Name="SEC_MODULO_ID" Member="SecModuloId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" Precision="10" Scale="0" Guid="ce3b9bf3-beae-4a02-8cfc-b39dd71b0122" />
+      <Column Name="NOMBRE" Member="Nombre" Type="System.String" DbType="VARCHAR(100) NOT NULL" CanBeNull="false" MaxLength="100" Guid="9fb2425f-b9bb-42b5-b22f-cd2b5a8e9f0c" />
+      <Column Name="OPCION_KEY" Member="OpcionKey" Type="System.String" DbType="VARCHAR(50) NOT NULL" CanBeNull="false" MaxLength="50" Guid="00cb2d34-f92d-42ce-8cca-4b8b4947b1c1" />
+      <Column Name="ACTIVO" Member="Activo" Type="System.Boolean" DbType="BIT NOT NULL" CanBeNull="false" Guid="8c01f5c9-167d-4e6e-81e7-c4ce321cebb6" />
+      <Association Name="SecModulo_SecOpcion" AssociationGuid="a597ad3a-6205-4081-8059-47a10c2da67c" Member="SecModulo" Guid="255be779-82b1-44d4-bf89-9b094345a162" ThisKey="SecModuloId" OtherKey="SecModuloId" Type="SecModulo" IsForeignKey="true" />
+      <Association Name="SecOpcion_SecPerfilOpcion" AssociationGuid="1f83638d-cdf0-4e4d-8ccf-f5466c3c05cd" Member="SecPerfilOpcions" Guid="90442385-aa78-4652-b1e1-bf6b358721f9" ThisKey="SecOpcionId" OtherKey="SecOpcionId" Type="SecPerfilOpcion" />
+    </Type>
+  </Table>
+  <Table Name="[dbo].SEC_ORGANIZACION" Member="SecOrganizacions">
+    <Type Name="SecOrganizacion" Guid="3cb4dee1-b9ef-4725-b76d-0ab6df42024f">
+      <Column Name="ORGANIZACION_ID" Member="OrganizacionId" Type="System.Int32" DbType="INT NOT NULL" IsPrimaryKey="true" CanBeNull="false" Precision="10" Scale="0" Guid="da269764-914f-4fcb-9b2b-a6b2b20b2548" />
+      <Column Name="NOMBRE" Member="Nombre" Type="System.String" DbType="VARCHAR(100) NOT NULL" CanBeNull="false" MaxLength="100" Guid="4ce5eb15-72a1-489e-bbed-580ad75e2e5a" />
+      <Column Name="ORGANIZACION_KEY" Member="OrganizacionKey" Type="System.String" DbType="VARCHAR(50) NOT NULL" CanBeNull="false" MaxLength="50" Guid="56f52bce-5abc-44eb-a853-5e6fd1c720ef" />
+      <Column Name="ACTIVO" Member="Activo" Type="System.Boolean" DbType="BIT" CanBeNull="true" Guid="3707fcbf-d93d-4ed0-9c4e-f1332c0bd126" />
+      <Column Name="DIRECCION" Member="Direccion" Type="System.String" DbType="VARCHAR(512)" CanBeNull="true" MaxLength="512" Guid="0f0a5a56-f0c4-4227-a3cd-4774e8c9cb34" />
+      <Column Name="EMAIL" Member="Email" Type="System.String" DbType="VARCHAR(512)" CanBeNull="true" MaxLength="512" Guid="b1ce02ab-c94a-44ee-9151-fba524ff16b4" />
+      <Column Name="FECHAINICIO" Member="Fechainicio" Type="System.DateTime" DbType="DATETIME" CanBeNull="true" Guid="1f831635-d463-4f8b-b6ce-406788af8ec7" />
+      <Column Name="FECHAFIN" Member="Fechafin" Type="System.DateTime" DbType="DATETIME" CanBeNull="true" Guid="0b1c714a-30fc-470c-979a-b8cccfbdde02" />
+      <Association Name="SecOrganizacion_SecPerfil" AssociationGuid="f316f85b-c54e-44e0-bb07-9be20dd53a5a" Member="SecPerfils" Guid="218b321a-dbff-445c-a835-ebe6e382f7f2" ThisKey="OrganizacionId" OtherKey="OrganizacionId" Type="SecPerfil" />
+      <Association Name="SecOrganizacion_SecUsuario" AssociationGuid="bd51b92b-48d8-4666-80bd-1fd1b9134f51" Member="SecUsuarios" Guid="1e4990cf-a49a-4663-a229-b10f8993e93a" ThisKey="OrganizacionId" OtherKey="OrganizacionId" Type="SecUsuario" />
+    </Type>
+  </Table>
+  <Table Name="[dbo].SEC_PERFIL" Member="SecPerfils">
+    <Type Name="SecPerfil" Guid="d33097cd-cf03-460d-a28e-7d91e3e17fea">
+      <Column Name="SEG_PERFIL_ID" Member="SegPerfilId" Type="System.Int32" DbType="INT NOT NULL" IsPrimaryKey="true" CanBeNull="false" Precision="10" Scale="0" Guid="1a5638bf-5187-411a-a8cd-d3722adae645" />
+      <Column Name="ORGANIZACION_ID" Member="OrganizacionId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" Precision="10" Scale="0" Guid="66d4838f-a5ef-4b93-9a32-257ecc2c6987" />
+      <Column Name="NOMBRE" Member="Nombre" Type="System.String" DbType="VARCHAR(100) NOT NULL" CanBeNull="false" MaxLength="100" Guid="f2280a10-7b4e-4614-b3f4-adf3d910aa8a" />
+      <Column Name="ACTIVO" Member="Activo" Type="System.Boolean" DbType="BIT" CanBeNull="true" Guid="6a23231f-0d22-435c-bdac-e0c5344ec57f" />
+      <Column Name="ES_ADMIN" Member="EsAdmin" Type="System.Boolean" DbType="BIT NOT NULL" CanBeNull="false" Guid="ab65faa1-a56b-45dd-bcf4-23a975c82458" />
+      <Association Name="SecOrganizacion_SecPerfil" AssociationGuid="f316f85b-c54e-44e0-bb07-9be20dd53a5a" Member="SecOrganizacion" Guid="e77e3563-6c13-4169-8c89-965129574cc9" ThisKey="OrganizacionId" OtherKey="OrganizacionId" Type="SecOrganizacion" IsForeignKey="true" />
+      <Association Name="SecPerfil_SecPerfilOpcion" AssociationGuid="da2769a0-9789-43d5-bd1c-63d21e98330b" Member="SecPerfilOpcions" Guid="103bb1ca-b5c2-4507-8a47-6b5e5658f2cb" ThisKey="SegPerfilId" OtherKey="SecPerfilId" Type="SecPerfilOpcion" />
+      <Association Name="SecPerfil_SecUsuario" AssociationGuid="038a5fd2-56b1-4c63-ae7f-89523b5b9075" Member="SecUsuarios" Guid="d52a9c0e-f1d0-4e60-9000-09ab8b8e11ee" ThisKey="SegPerfilId" OtherKey="PerfilId" Type="SecUsuario" />
+    </Type>
+  </Table>
+  <Table Name="[dbo].SEC_PERFIL_OPCION" Member="SecPerfilOpcions">
+    <Type Name="SecPerfilOpcion" Guid="e7c8135f-1e3a-4e5f-bc2e-d91755c2b335">
+      <Column Name="SEC_PERFIL_OPCION_ID" Member="SecPerfilOpcionId" Type="System.Int32" DbType="INT NOT NULL" IsPrimaryKey="true" CanBeNull="false" Precision="10" Scale="0" Guid="99aee56f-9251-40b4-8259-1f28356cad81" />
+      <Column Name="SEC_OPCION_ID" Member="SecOpcionId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" Precision="10" Scale="0" Guid="6ac7f7ce-2700-48a0-97a4-bc019943ce7b" />
+      <Column Name="SEC_PERFIL_ID" Member="SecPerfilId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" Precision="10" Scale="0" Guid="7bc5438e-ab69-46a5-a319-f2da93480b9e" />
+      <Column Name="ACTIVO" Member="Activo" Type="System.Boolean" DbType="BIT" CanBeNull="true" Guid="f16c5305-e3fb-486f-9017-e00df08e5f1a" />
+      <Association Name="SecOpcion_SecPerfilOpcion" AssociationGuid="1f83638d-cdf0-4e4d-8ccf-f5466c3c05cd" Member="SecOpcion" Guid="75854c80-7d8f-408c-9e0c-7370597747e4" ThisKey="SecOpcionId" OtherKey="SecOpcionId" Type="SecOpcion" IsForeignKey="true" />
+      <Association Name="SecPerfil_SecPerfilOpcion" AssociationGuid="da2769a0-9789-43d5-bd1c-63d21e98330b" Member="SecPerfil" Guid="52fb719f-9ce8-40e8-8197-1c06f09e1198" ThisKey="SecPerfilId" OtherKey="SegPerfilId" Type="SecPerfil" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="[dbo].SEC_USUARIO" Member="SecUsuarios">
+    <Type Name="SecUsuario" Guid="6b1b4fbe-de24-4ae4-997b-b11f52141618">
+      <Column Name="SEG_USUARIO_ID" Member="SegUsuarioId" Type="System.Int32" DbType="INT NOT NULL" IsPrimaryKey="true" CanBeNull="false" Precision="10" Scale="0" Guid="fa52f83b-16cb-4c0a-b7a2-d37547a175cc" />
+      <Column Name="PERFIL_ID" Member="PerfilId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" Precision="10" Scale="0" Guid="f65aa51c-e15f-4cd0-90b2-8acfb5fab5d6" />
+      <Column Name="ORGANIZACION_ID" Member="OrganizacionId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" Precision="10" Scale="0" Guid="2266bcec-9db7-4082-a05b-48db5d9dbd11" />
+      <Column Name="USERNAME" Member="Username" Type="System.String" DbType="VARCHAR(20) NOT NULL" CanBeNull="false" MaxLength="20" Guid="e43fd527-e699-4204-ae45-f2e37ed80fb4" />
+      <Column Name="NOMBRE" Member="Nombre" Type="System.String" DbType="VARCHAR(100)" CanBeNull="true" MaxLength="100" Guid="e3ba9fdf-5d2e-4f9e-b918-ef84b4b9fe2a" />
+      <Column Name="APELLIDO" Member="Apellido" Type="System.String" DbType="VARCHAR(100) NOT NULL" CanBeNull="false" MaxLength="100" Guid="de92742f-fec4-4949-9808-4f537ce4d93d" />
+      <Column Name="EMAIL" Member="Email" Type="System.String" DbType="VARCHAR(512) NOT NULL" CanBeNull="false" MaxLength="512" Guid="d202c7fd-20ff-4c38-8fd8-810b5a8345aa" />
+      <Column Name="ACTIVO" Member="Activo" Type="System.Boolean" DbType="BIT" CanBeNull="true" Guid="f1891426-1acb-490f-994e-97936c0a2ff8" />
+      <Column Name="PASSWORD" Member="Password" Type="System.String" DbType="VARCHAR(200)" CanBeNull="true" MaxLength="200" Guid="5ebb4c7d-84d8-4fea-ad00-0aeabb0f6e0f" />
+      <Column Name="ES_ADMIN" Member="EsAdmin" Type="System.Boolean" DbType="BIT NOT NULL" CanBeNull="false" Guid="9aa6bce7-6c14-4100-aa1c-c0ba4215d237" />
+      <Column Name="CAMBIA_PASSWORD" Member="CambiaPassword" Type="System.Boolean" DbType="BIT" CanBeNull="true" Guid="1ff13332-73db-481c-99b8-be71d2e6aa41" />
+      <Column Name="FECHA_PASSWORD" Member="FechaPassword" Type="System.DateTime" DbType="DATETIME" CanBeNull="true" Guid="473c6fee-f472-4c2e-abea-46c396ea0a59" />
+      <Association Name="SecOrganizacion_SecUsuario" AssociationGuid="bd51b92b-48d8-4666-80bd-1fd1b9134f51" Member="SecOrganizacion" Guid="d4c8bf76-43b9-4881-95a4-a80304b2ffa8" ThisKey="OrganizacionId" OtherKey="OrganizacionId" Type="SecOrganizacion" IsForeignKey="true" />
+      <Association Name="SecPerfil_SecUsuario" AssociationGuid="038a5fd2-56b1-4c63-ae7f-89523b5b9075" Member="SecPerfil" Guid="39f73711-4126-45e7-838f-51b0d6f72b43" ThisKey="PerfilId" OtherKey="SegPerfilId" Type="SecPerfil" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

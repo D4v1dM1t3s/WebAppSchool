@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="SCHOOL" EntityNamespace="DataContext" ContextNamespace="DataContext" Class="SchoolDataContext" Guid="a266de81-9d51-4296-ae9f-a884ef15a502" Provider="Devart.Data.Oracle.Linq.Provider.OracleDataProvider, Devart.Data.Oracle.Linq" Extended="true" xmlns="http://schemas.devart.com/linqconnect/mapping">
+  <Connection Mode="ConnectionString" ConnectionString="User Id=school;Password=orac;Server=localhost;Persist Security Info=True" Provider="Devart.Data.Oracle" />
+  <Table Name="SCHOOL.ALUMNO" Member="Alumnos">
+    <Type Name="Alumno" Guid="bb90b1e3-0abe-451a-93b2-e661daf732ec">
+      <Column Name="CEDULA" Member="Cedula" Type="System.String" DbType="VARCHAR2(13) NOT NULL" IsPrimaryKey="true" CanBeNull="false" MaxLength="13" Guid="af9f6457-6379-4a1c-a1cf-0258661ddc55" />
+      <Column Name="NOMBRES" Member="Nombres" Type="System.String" DbType="VARCHAR2(128) NULL" CanBeNull="true" MaxLength="128" Guid="5e2db301-e92a-4c8b-b26a-6d030f3a9926" />
+      <Column Name="DIRECCION" Member="Direccion" Type="System.String" DbType="VARCHAR2(128) NULL" CanBeNull="true" MaxLength="128" Guid="fa52c0db-0c52-4492-8d63-9bff0399bb94" />
+      <Column Name="TELEFONO" Member="Telefono" Type="System.String" DbType="VARCHAR2(15) NULL" CanBeNull="true" MaxLength="15" Guid="f8c8fe65-9037-4353-bdfe-83faf0bb687d" />
+      <Association Name="Alumno_Asignatura" AssociationGuid="1d5ab02e-c9ec-4b1e-920d-7745b3c67d2a" Member="Asignaturas" Guid="94af061e-19ee-4ce5-91b3-456152e0f612" ThisKey="Cedula" OtherKey="AlumnoDni" Type="Asignatura" />
+      <Association Name="Alumno_Nota" AssociationGuid="ef11165f-63de-46a8-847a-95385d60a398" Member="Notas" Guid="3248ce2e-1d01-40f9-be46-cd4129906975" ThisKey="Cedula" OtherKey="AlumnoCedula" Type="Nota" />
+    </Type>
+  </Table>
+  <Table Name="SCHOOL.ASIGNATURA" Member="Asignaturas">
+    <Type Name="Asignatura" Guid="f369196b-0745-452f-818a-c5784df74023">
+      <Column Name="ALUMNO_DNI" Member="AlumnoDni" Type="System.String" DbType="VARCHAR2(15) NOT NULL" CanBeNull="false" MaxLength="15" Guid="e6fc5aac-6f29-4dff-b267-70af75101c07" />
+      <Column Name="PROFESOR_DNI" Member="ProfesorDni" Type="System.String" DbType="VARCHAR2(15) NOT NULL" CanBeNull="false" MaxLength="15" Guid="05789d8d-16cf-41ba-b91a-f1fa87848b23" />
+      <Column Name="ID" Member="Id" Type="System.Decimal" DbType="NUMBER NOT NULL" IsPrimaryKey="true" CanBeNull="false" MaxLength="22" Guid="e48c71ae-f373-42ec-9072-ffe983d6f44b" />
+      <Column Name="MATERIA_COD" Member="MateriaCod" Type="System.String" DbType="VARCHAR2(16) NOT NULL" CanBeNull="false" MaxLength="16" Guid="a4652d2f-3fdb-481b-9189-01628f418a7f" />
+      <Column Name="TAREAS" Member="Tareas" Type="System.Double" DbType="NUMBER(4,2) NOT NULL" CanBeNull="false" DefaultValue="0" MaxLength="22" Precision="4" Scale="2" Guid="9def1827-4ed9-4d68-8157-f5c5f748a355" />
+      <Column Name="EXAMEN" Member="Examen" Type="System.Double" DbType="NUMBER(4,2) NOT NULL" CanBeNull="false" DefaultValue="0" MaxLength="22" Precision="4" Scale="2" Guid="445c5e73-f165-4a56-999c-78b731940c17" />
+      <Association Name="Alumno_Asignatura" AssociationGuid="1d5ab02e-c9ec-4b1e-920d-7745b3c67d2a" Member="Alumno" Guid="7022b35a-d56d-4147-bca2-0e1ad3fa7d83" ThisKey="AlumnoDni" OtherKey="Cedula" Type="Alumno" IsForeignKey="true" />
+      <Association Name="Profesor_Asignatura" AssociationGuid="38aaabe2-2290-45cf-9b57-311a2ea78a01" Member="Profesor" Guid="94e1d63e-8cb3-4682-acb6-5572549a9a55" ThisKey="ProfesorDni" OtherKey="Cedula" Type="Profesor" IsForeignKey="true" />
+      <Association Name="Materia_Asignatura" AssociationGuid="dc5fe113-5637-420f-a4f8-f49bf7a3ce78" Member="Materia" Guid="83f13c58-34b2-40c7-b315-85367e3a026e" ThisKey="MateriaCod" OtherKey="Codigo" Type="Materia" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="SCHOOL.EVALUACION" Member="Evaluacions">
+    <Type Name="Evaluacion" Guid="fc2eb258-df71-44e5-9c2a-1faed27d7ad5">
+      <Column Name="ID" Member="Id" Type="System.Decimal" DbType="NUMBER NOT NULL" IsPrimaryKey="true" CanBeNull="false" MaxLength="22" Scale="0" Guid="9989e6c3-6d3d-403f-8a1c-3cf4581920a6" />
+      <Column Name="EVALUACION" Member="Evaluacion1" Type="System.String" DbType="VARCHAR2(64) NULL" CanBeNull="true" MaxLength="64" Guid="95d9ddb8-ada7-44d8-8c99-79d81dab7a4e" />
+      <Column Name="CODIGO_MATERIA" Member="CodigoMateria" Type="System.String" DbType="VARCHAR2(64) NOT NULL" CanBeNull="false" MaxLength="64" Guid="479f762a-5621-4094-a40e-a14921d980c0" />
+      <Association Name="Evaluacion_Nota" AssociationGuid="ba8a6184-69a7-4535-9cbd-33a1dfab6df7" Member="Notas" Guid="0ab34827-ea52-41d7-a8cb-ca23d01640e4" ThisKey="Id" OtherKey="EvaluacionId" Type="Nota" />
+    </Type>
+  </Table>
+  <Table Name="SCHOOL.NOTAS" Member="Notas">
+    <Type Name="Nota" Guid="02d865dc-8310-4776-b619-74d031c0308c">
+      <Column Name="ID" Member="Id" Type="System.Decimal" DbType="NUMBER NOT NULL" IsPrimaryKey="true" CanBeNull="false" MaxLength="22" Scale="0" Guid="0678a6dc-4910-42bc-8675-133bb426fd7a" />
+      <Column Name="EVALUACION_ID" Member="EvaluacionId" Type="System.Decimal" DbType="NUMBER NULL" CanBeNull="true" MaxLength="22" Scale="0" Guid="573f8bae-cfc9-4a6e-8cf1-16e2fdd105af" />
+      <Column Name="ALUMNO_CEDULA" Member="AlumnoCedula" Type="System.String" DbType="VARCHAR2(15) NULL" CanBeNull="true" MaxLength="15" Guid="eb2ae76b-011c-48d9-b2e3-9ed005d05a00" />
+      <Association Name="Alumno_Nota" AssociationGuid="ef11165f-63de-46a8-847a-95385d60a398" Member="Alumno" Guid="0d03df8e-2dd3-4fba-b9f6-053019128ede" ThisKey="AlumnoCedula" OtherKey="Cedula" Type="Alumno" IsForeignKey="true" />
+      <Association Name="Evaluacion_Nota" AssociationGuid="ba8a6184-69a7-4535-9cbd-33a1dfab6df7" Member="Evaluacion" Guid="f5f1ff87-e4e3-4012-893f-48acc69b9bf7" ThisKey="EvaluacionId" OtherKey="Id" Type="Evaluacion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="SCHOOL.PROFESOR" Member="Profesors">
+    <Type Name="Profesor" Guid="7983cefd-e217-4301-8735-dc772c3377d0">
+      <Column Name="CEDULA" Member="Cedula" Type="System.String" DbType="VARCHAR2(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" MaxLength="15" Guid="29b31be2-4ece-400f-9755-683118501617" />
+      <Column Name="NOMBRES" Member="Nombres" Type="System.String" DbType="VARCHAR2(128) NULL" CanBeNull="true" MaxLength="128" Guid="24dd07c6-b370-403b-87be-a31bbc8efe5a" />
+      <Column Name="TELEFONO" Member="Telefono" Type="System.String" DbType="VARCHAR2(15) NULL" CanBeNull="true" MaxLength="15" Guid="50280789-23f2-4582-8cfc-24ffbc60c289" />
+      <Association Name="Profesor_Asignatura" AssociationGuid="38aaabe2-2290-45cf-9b57-311a2ea78a01" Member="Asignaturas" Guid="83fe1df4-fecb-4e08-9647-94cb59202721" ThisKey="Cedula" OtherKey="ProfesorDni" Type="Asignatura" />
+    </Type>
+  </Table>
+  <Table Name="SCHOOL.MATERIA" Member="Materias">
+    <Type Name="Materia" Guid="5c9b993e-3468-4064-9977-eb713a81a220">
+      <Column Name="CODIGO" Member="Codigo" Type="System.String" DbType="VARCHAR2(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" MaxLength="16" Guid="7a5acb24-7eae-4e43-b2ff-1959a76ece74" />
+      <Column Name="TITULO" Member="Titulo" Type="System.String" DbType="VARCHAR2(64) NOT NULL" CanBeNull="false" MaxLength="64" Guid="f8138630-28e1-4429-97d1-7dfecf296788" />
+      <Column Name="AREA" Member="Area" Type="System.String" DbType="VARCHAR2(64) NULL" CanBeNull="true" MaxLength="64" Guid="20e51dce-02df-4a73-919e-01790b29acf4" />
+      <Association Name="Materia_Asignatura" AssociationGuid="dc5fe113-5637-420f-a4f8-f49bf7a3ce78" Member="Asignaturas" Guid="e0de4a49-8ccf-48bc-9845-04b73a8fd5fa" ThisKey="Codigo" OtherKey="MateriaCod" Type="Asignatura" />
+    </Type>
+  </Table>
+</Database>
